@@ -21,10 +21,10 @@ export function ProgressPreviewSection() {
             <Reveal
               key={title}
               delay={index * 0.08}
-              className="rounded-[2rem] border border-black/5 bg-white/80 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.06)] backdrop-blur-xl"
+              className="rounded-[2rem] border border-black/5 bg-white/80 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.06)] backdrop-blur-xl dark:border-white/10 dark:bg-white/5 dark:shadow-none"
             >
-              <div className="text-xl font-semibold tracking-tight text-zinc-950">{title}</div>
-              <p className="mt-3 text-sm leading-7 text-zinc-600">{description}</p>
+              <div className="text-xl font-semibold tracking-tight text-zinc-950 dark:text-white">{title}</div>
+              <p className="mt-3 text-sm leading-7 text-zinc-600 dark:text-zinc-400">{description}</p>
             </Reveal>
           ))}
         </div>

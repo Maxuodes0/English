@@ -33,6 +33,10 @@ export function normalizeAnswer(value: string) {
   return value.trim().toLowerCase();
 }
 
+export function containsArabic(value: string) {
+  return /[\u0600-\u06FF]/.test(value);
+}
+
 export function shuffle<T>(items: T[]) {
   const copy = [...items];
 

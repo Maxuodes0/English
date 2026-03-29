@@ -18,11 +18,11 @@ export function SectionHeading({
     <div className={cn("space-y-5", align === "center" && "mx-auto max-w-3xl text-center")}>
       <Badge>{eyebrow}</Badge>
       <div className="space-y-3">
-        <h2 className="max-w-4xl text-4xl font-semibold tracking-[-0.05em] text-slate-950 sm:text-5xl">
+        <h2 className="max-w-4xl text-4xl font-semibold tracking-[-0.05em] text-slate-950 dark:text-white sm:text-5xl">
           {title}
         </h2>
         {description ? (
-          <p className="max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
+          <p className="max-w-2xl text-base leading-8 text-slate-600 dark:text-zinc-400 sm:text-lg">
             {description}
           </p>
         ) : null}

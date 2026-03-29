@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useProgress } from "@/components/ui/progress-provider";
 import { buildWordQuizSet, isAnswerCorrect } from "@/lib/quiz";
 import { QuizQuestion, WordRecord } from "@/lib/types";
-import { cn } from "@/lib/utils";
+import { cn, containsArabic } from "@/lib/utils";
 
 type WordPracticePanelProps = {
   word: WordRecord;
@@ -53,12 +53,15 @@ export function WordPracticePanel({ word, words }: WordPracticePanelProps) {
   }
 
   return (
-    <div className="rounded-[2rem] border border-black/5 bg-white/80 p-6 shadow-[0_20px_70px_rgba(15,23,42,0.08)] backdrop-blur-xl">
+    <div className="rounded-[2rem] border border-black/5 bg-white/80 p-6 shadow-[0_20px_70px_rgba(15,23,42,0.08)] backdrop-blur-xl dark:border-white/10 dark:bg-white/5 dark:shadow-none">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <div className="text-xl font-semibold tracking-tight text-zinc-950">Practice this word</div>
-          <p className="mt-2 max-w-2xl text-sm leading-7 text-zinc-600">
-            Run the four quiz modes against a single word, then continue into a full quiz session if you want repetition.
+          <div className="text-xl font-semibold tracking-tight text-zinc-950 dark:text-white">
+            Practice this word
+          </div>
+          <p className="mt-2 max-w-2xl text-sm leading-7 text-zinc-600 dark:text-zinc-400">
+            Run the four quiz modes against a single word, then continue into a full quiz session if
+            you want repetition.
           </p>
         </div>
         <div className="flex gap-3">
@@ -67,7 +70,7 @@ export function WordPracticePanel({ word, words }: WordPracticePanelProps) {
           </Button>
           <Link
             href={`/quiz?word=${word.slug}`}
-            className="inline-flex items-center justify-center rounded-full border border-black bg-black px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-zinc-900"
+            className="inline-flex items-center justify-center rounded-full border border-black bg-black px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-zinc-900 dark:border-white dark:bg-white dark:text-black dark:hover:bg-zinc-100"
           >
             Focused quiz
           </Link>
@@ -81,16 +84,17 @@ export function WordPracticePanel({ word, words }: WordPracticePanelProps) {
           return (
             <div
               key={question.id}
-              className="rounded-[1.6rem] border border-black/6 bg-zinc-50/80 p-5"
+              className="rounded-[1.6rem] border border-black/6 bg-zinc-50/80 p-5 dark:border-white/10 dark:bg-white/6"
             >
-              <div className="text-xs font-semibold tracking-[0.18em] text-zinc-400 uppercase">
+              <div className="text-xs font-semibold tracking-[0.18em] text-zinc-400 uppercase dark:text-zinc-500">
                 {question.mode.replace("-", " ")}
               </div>
-              <div className="mt-3 text-lg font-semibold tracking-tight text-zinc-950">
+              <div className="mt-3 text-lg font-semibold tracking-tight text-zinc-950 dark:text-white">
                 {question.prompt}
               </div>
+
               {question.statement ? (
-                <p className="mt-3 rounded-2xl bg-white px-4 py-3 text-sm text-zinc-700">
+                <p className="mt-3 rounded-2xl bg-white px-4 py-3 text-sm text-zinc-700 dark:bg-white/8 dark:text-zinc-300">
                   {question.statement}
                 </p>
               ) : null}
@@ -105,13 +109,14 @@ export function WordPracticePanel({ word, words }: WordPracticePanelProps) {
                       onClick={() => submit(question, option)}
                       className={cn(
                         "rounded-2xl border px-4 py-3 text-left text-sm transition",
+                        containsArabic(option) && "arabic-text text-lg font-medium",
                         result?.submitted && option === question.correctAnswer
-                          ? "border-emerald-300 bg-emerald-50 text-emerald-800"
-                          : "border-black/8 bg-white text-zinc-700 hover:border-black/15 hover:bg-black/[0.02]",
+                          ? "border-emerald-300 bg-emerald-50 text-emerald-800 dark:border-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-300"
+                          : "border-black/8 bg-white text-zinc-700 hover:border-black/15 hover:bg-black/[0.02] dark:border-white/10 dark:bg-white/8 dark:text-zinc-200 dark:hover:border-white/15 dark:hover:bg-white/10",
                         result?.submitted &&
                           option === result.answer &&
                           option !== question.correctAnswer &&
-                          "border-red-300 bg-red-50 text-red-700",
+                          "border-red-300 bg-red-50 text-red-700 dark:border-red-900 dark:bg-red-950/40 dark:text-red-300",
                       )}
                     >
                       {option}
@@ -132,12 +137,12 @@ export function WordPracticePanel({ word, words }: WordPracticePanelProps) {
                       className={cn(
                         "flex-1 rounded-2xl border px-4 py-3 text-sm transition",
                         result?.submitted && option.value === question.correctAnswer
-                          ? "border-emerald-300 bg-emerald-50 text-emerald-800"
-                          : "border-black/8 bg-white text-zinc-700 hover:border-black/15 hover:bg-black/[0.02]",
+                          ? "border-emerald-300 bg-emerald-50 text-emerald-800 dark:border-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-300"
+                          : "border-black/8 bg-white text-zinc-700 hover:border-black/15 hover:bg-black/[0.02] dark:border-white/10 dark:bg-white/8 dark:text-zinc-200 dark:hover:border-white/15 dark:hover:bg-white/10",
                         result?.submitted &&
                           option.value === result.answer &&
                           option.value !== question.correctAnswer &&
-                          "border-red-300 bg-red-50 text-red-700",
+                          "border-red-300 bg-red-50 text-red-700 dark:border-red-900 dark:bg-red-950/40 dark:text-red-300",
                       )}
                     >
                       {option.label}
@@ -155,7 +160,7 @@ export function WordPracticePanel({ word, words }: WordPracticePanelProps) {
                       }))
                     }
                     placeholder="Type the word"
-                    className="min-w-0 flex-1 rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm text-zinc-950 outline-none transition focus:border-black/20"
+                    className="min-w-0 flex-1 rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm text-zinc-950 outline-none transition focus:border-black/20 dark:border-white/10 dark:bg-white/8 dark:text-white dark:placeholder:text-zinc-500 dark:focus:border-white/15"
                   />
                   <Button onClick={() => submit(question, typedAnswers[question.id] ?? "")}>
                     Check
@@ -168,14 +173,21 @@ export function WordPracticePanel({ word, words }: WordPracticePanelProps) {
                   className={cn(
                     "mt-4 rounded-2xl px-4 py-3 text-sm",
                     result.isCorrect
-                      ? "bg-emerald-50 text-emerald-800"
-                      : "bg-amber-50 text-amber-800",
+                      ? "bg-emerald-50 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300"
+                      : "bg-amber-50 text-amber-800 dark:bg-amber-950/40 dark:text-amber-300",
                   )}
                 >
                   <div className="font-semibold">
                     {result.isCorrect ? "Correct answer." : `Correct answer: ${question.correctAnswer}`}
                   </div>
-                  <div className="mt-1 leading-6">{question.explanation}</div>
+                  <div
+                    className={cn(
+                      "mt-1 leading-6",
+                      containsArabic(question.explanation) && "arabic-text text-lg",
+                    )}
+                  >
+                    {question.explanation}
+                  </div>
                 </div>
               ) : null}
             </div>

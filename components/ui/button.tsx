@@ -8,11 +8,11 @@ const baseStyles =
 
 const variants = {
   primary:
-    "border-slate-300/70 bg-[linear-gradient(135deg,#1f2937,#334155)] px-5 py-3 !text-white shadow-[0_18px_50px_rgba(15,23,42,0.15)] hover:-translate-y-0.5 hover:!text-white hover:shadow-[0_24px_70px_rgba(15,23,42,0.2)] visited:!text-white",
+    "border-slate-300/70 bg-[linear-gradient(135deg,#1f2937,#334155)] px-5 py-3 !text-white shadow-[0_18px_50px_rgba(15,23,42,0.15)] hover:-translate-y-0.5 hover:!text-white hover:shadow-[0_24px_70px_rgba(15,23,42,0.2)] visited:!text-white dark:border-white/10 dark:bg-[linear-gradient(135deg,#fafafa,#d4d4d8)] dark:!text-black",
   secondary:
-    "border-black/10 bg-white/82 px-5 py-3 !text-zinc-900 backdrop-blur-xl hover:-translate-y-0.5 hover:border-black/15 hover:bg-white hover:!text-zinc-950 visited:!text-zinc-900",
+    "border-black/10 bg-white/82 px-5 py-3 !text-zinc-900 backdrop-blur-xl hover:-translate-y-0.5 hover:border-black/15 hover:bg-white hover:!text-zinc-950 visited:!text-zinc-900 dark:border-white/10 dark:bg-white/6 dark:!text-white dark:hover:border-white/15 dark:hover:bg-white/10 dark:hover:!text-white",
   ghost:
-    "border-transparent bg-transparent px-3 py-2 !text-zinc-700 hover:bg-black/5 hover:!text-black visited:!text-zinc-700",
+    "border-transparent bg-transparent px-3 py-2 !text-zinc-700 hover:bg-black/5 hover:!text-black visited:!text-zinc-700 dark:!text-zinc-300 dark:hover:bg-white/8 dark:hover:!text-white",
 } as const;
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {

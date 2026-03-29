@@ -42,24 +42,24 @@ export function WordExplorer({ words, categories }: WordExplorerProps) {
         description="Search by English or Arabic, narrow by CEFR level, and move from discovery to a focused study view without leaving the flow."
       />
 
-      <div className="rounded-[2rem] border border-black/5 bg-white/80 p-5 shadow-[0_24px_80px_rgba(15,23,42,0.08)] backdrop-blur-xl sm:p-6">
+      <div className="rounded-[2rem] border border-black/5 bg-white/80 p-5 shadow-[0_24px_80px_rgba(15,23,42,0.08)] backdrop-blur-xl dark:border-white/10 dark:bg-white/5 dark:shadow-none sm:p-6">
         <div className="grid gap-4 lg:grid-cols-[1.4fr_repeat(2,minmax(0,0.7fr))]">
           <label className="flex flex-col gap-2">
-            <span className="text-sm font-medium text-zinc-600">Search</span>
+            <span className="text-sm font-medium text-zinc-600 dark:text-zinc-300">Search</span>
             <input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              placeholder="Try book, travel, or كتاب"
-              className="rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm text-zinc-950 outline-none transition focus:border-black/20"
+              placeholder={"Try book, travel, or \u0643\u062A\u0627\u0628"}
+              className="rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm text-zinc-950 outline-none transition focus:border-black/20 dark:border-white/10 dark:bg-white/6 dark:text-white dark:placeholder:text-zinc-500 dark:focus:border-white/15"
             />
           </label>
 
           <label className="flex flex-col gap-2">
-            <span className="text-sm font-medium text-zinc-600">Level</span>
+            <span className="text-sm font-medium text-zinc-600 dark:text-zinc-300">Level</span>
             <select
               value={level}
               onChange={(event) => setLevel(event.target.value as (typeof LEVELS)[number] | "all")}
-              className="rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm text-zinc-950 outline-none transition focus:border-black/20"
+              className="rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm text-zinc-950 outline-none transition focus:border-black/20 dark:border-white/10 dark:bg-white/6 dark:text-white dark:focus:border-white/15"
             >
               <option value="all">All levels</option>
               {LEVELS.map((item) => (
@@ -71,13 +71,13 @@ export function WordExplorer({ words, categories }: WordExplorerProps) {
           </label>
 
           <label className="flex flex-col gap-2">
-            <span className="text-sm font-medium text-zinc-600">Category</span>
+            <span className="text-sm font-medium text-zinc-600 dark:text-zinc-300">Category</span>
             <select
               value={category}
               onChange={(event) =>
                 setCategory(event.target.value as CategoryRecord["id"] | "all")
               }
-              className="rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm text-zinc-950 outline-none transition focus:border-black/20"
+              className="rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm text-zinc-950 outline-none transition focus:border-black/20 dark:border-white/10 dark:bg-white/6 dark:text-white dark:focus:border-white/15"
             >
               <option value="all">All categories</option>
               {categories.map((item) => (
@@ -95,7 +95,7 @@ export function WordExplorer({ words, categories }: WordExplorerProps) {
               key={item.id}
               type="button"
               onClick={() => setCategory((current) => (current === item.id ? "all" : item.id))}
-              className="rounded-full border border-black/8 px-3 py-2 text-sm text-zinc-600 transition hover:border-black/15 hover:text-zinc-950"
+              className="rounded-full border border-black/8 px-3 py-2 text-sm text-zinc-600 transition hover:border-black/15 hover:text-zinc-950 dark:border-white/10 dark:text-zinc-300 dark:hover:border-white/15 dark:hover:text-white"
             >
               {item.title}
             </button>
@@ -106,10 +106,10 @@ export function WordExplorer({ words, categories }: WordExplorerProps) {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap gap-2">
           <Badge>{filteredWords.length} words shown</Badge>
-          <Badge className="border-black/5 bg-black/5 text-zinc-600">
+          <Badge className="border-black/5 bg-black/5 text-zinc-600 dark:border-white/10 dark:bg-white/8 dark:text-zinc-300">
             {level === "all" ? "All levels" : `Level ${level}`}
           </Badge>
-          <Badge className="border-black/5 bg-black/5 text-zinc-600">
+          <Badge className="border-black/5 bg-black/5 text-zinc-600 dark:border-white/10 dark:bg-white/8 dark:text-zinc-300">
             {category === "all"
               ? "All categories"
               : categories.find((item) => item.id === category)?.title}
@@ -127,9 +127,11 @@ export function WordExplorer({ words, categories }: WordExplorerProps) {
           ))}
         </div>
       ) : (
-        <div className="rounded-[2rem] border border-dashed border-black/10 bg-white/60 px-6 py-16 text-center">
-          <div className="text-xl font-semibold tracking-tight text-zinc-950">No words match this filter.</div>
-          <p className="mt-3 text-sm leading-7 text-zinc-600">
+        <div className="rounded-[2rem] border border-dashed border-black/10 bg-white/60 px-6 py-16 text-center dark:border-white/10 dark:bg-white/5">
+          <div className="text-xl font-semibold tracking-tight text-zinc-950 dark:text-white">
+            No words match this filter.
+          </div>
+          <p className="mt-3 text-sm leading-7 text-zinc-600 dark:text-zinc-400">
             Try a broader search, switch the level, or clear the category filter.
           </p>
         </div>
