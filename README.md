@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Lumena
 
-## Getting Started
+Lumena is a premium English vocabulary platform for Arabic learners, built with Next.js App Router, TypeScript, Tailwind CSS, Framer Motion, and Supabase-ready data boundaries.
 
-First, run the development server:
+## What ships in this MVP
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Apple-inspired landing experience with subtle motion and glass surfaces
+- Curated 100-word bilingual starter dataset structured for a future 20,000-word catalog
+- Word browsing with search, CEFR level filters, and category filters
+- Word detail pages with bilingual definitions, examples, related words, and audio-ready placeholders
+- Focus mode for distraction-free study
+- Four quiz modes:
+  - Multiple choice
+  - True / false
+  - Arabic to English
+  - Typing test
+- Local progress tracking:
+  - Accuracy
+  - Weak words
+  - Completed words
+  - Daily streak
+  - Level progress
+- Supabase schema for `words`, `categories`, `user_progress`, and `quiz_results`
+- API routes for `/api/words` and `/api/daily`
+
+## Stack
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- Framer Motion
+- Supabase
+
+## Project structure
+
+```text
+app/
+components/
+  sections/
+  ui/
+data/
+lib/
+supabase/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Local development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open `http://localhost:3000`.
 
-## Learn More
+## Validation
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run lint
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Both commands pass in the current state.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Supabase setup
 
-## Deploy on Vercel
+1. Copy `.env.example` to `.env.local`
+2. Add:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `SUPABASE_SERVICE_ROLE_KEY`
+3. Apply `supabase/schema.sql`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The current MVP uses local persistence for progress and is ready to be connected to Supabase auth and tables next.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Notes
+
+- The product architecture is ready for a larger 20,000-word import.
+- The bundled dataset is intentionally curated and limited to 100 words for the shipped MVP seed.
