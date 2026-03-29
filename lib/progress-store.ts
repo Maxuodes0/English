@@ -11,6 +11,9 @@ export const initialProgressState: ProgressState = {
   quizHistory: [],
 };
 
+let cachedRawState: string | null = null;
+let cachedProgressState: ProgressState = initialProgressState;
+
 function toDateKey(date = new Date()) {
   return date.toISOString().slice(0, 10);
 }
@@ -23,16 +26,26 @@ export function loadProgressState() {
   const raw = window.localStorage.getItem(STORAGE_KEY);
 
   if (!raw) {
-    return initialProgressState;
+    cachedRawState = null;
+    cachedProgressState = initialProgressState;
+    return cachedProgressState;
+  }
+
+  if (raw === cachedRawState) {
+    return cachedProgressState;
   }
 
   try {
-    return {
+    cachedRawState = raw;
+    cachedProgressState = {
       ...initialProgressState,
       ...JSON.parse(raw),
     } as ProgressState;
+    return cachedProgressState;
   } catch {
-    return initialProgressState;
+    cachedRawState = null;
+    cachedProgressState = initialProgressState;
+    return cachedProgressState;
   }
 }
 
@@ -41,7 +54,9 @@ export function saveProgressState(state: ProgressState) {
     return;
   }
 
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  cachedProgressState = state;
+  cachedRawState = JSON.stringify(state);
+  window.localStorage.setItem(STORAGE_KEY, cachedRawState);
 }
 
 function updateDailyStreak(state: ProgressState, answeredAt: string) {
